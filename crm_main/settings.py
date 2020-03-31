@@ -46,6 +46,7 @@ THIRD_PARTY_APPS =[
 LOCAL_APPS =[
     # add local apps which you create using startapp
     'apps.common',
+    'apps.userprofile',
 ]
 
 # Application definition
