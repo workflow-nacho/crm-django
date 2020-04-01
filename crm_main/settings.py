@@ -133,9 +133,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+LOGIN_REDIRECT_URL = 'dashboard'
 
 # Import everything from local settings
 try:
     from crm_main.local_settings import *
 except ImportError:
     pass
+
+# This will print email in console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
