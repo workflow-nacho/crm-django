@@ -43,6 +43,9 @@ THIRD_PARTY_APPS =[
     # add apps which you install using pip
     'crispy_forms',
     'django_cleanup',
+
+    'social_django',  # <-- Here social-auth-app-django
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -65,6 +68,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'crm_main.urls'
@@ -80,10 +85,21 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'crm_main.wsgi.application'
 
@@ -134,7 +150,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
 LOGIN_REDIRECT_URL = 'dashboard'
+
+# Static variables for the django social auth app
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+#LOGIN_REDIRECT_URL = 'home'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '4300781253280271'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '619b59ec55010153d5d7e0ff51e5f99e'  # App Secret
+
 
 # Import everything from local settings
 try:

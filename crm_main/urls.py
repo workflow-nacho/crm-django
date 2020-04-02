@@ -1,11 +1,17 @@
 from django.contrib import admin
+
 from django.urls import path
 from apps.common.views import HomeView, SignUpView, DashboardView, ProfileView, ProfileUpdateView
 from django.contrib.auth import views as auth_views
 
+from django.urls import path, include
+from apps.common.views import HomeView
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
+
     path('register/', SignUpView.as_view(), name='register'),
 
     path('profile/', ProfileView.as_view(), name='profile'),
@@ -56,6 +62,8 @@ urlpatterns = [
          ),
          name='password_reset_complete'),
 
+    path('oauth/', include('social_django.urls', namespace='social')),
+    
 ]
 
 # Extending User Model Using a Proxy Model require to import the following:
