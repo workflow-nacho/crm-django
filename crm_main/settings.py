@@ -144,3 +144,13 @@ except ImportError:
 
 # This will print email in console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# To hack Bootstrap alert class we import messages constants and to set classes of bootstrap
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
